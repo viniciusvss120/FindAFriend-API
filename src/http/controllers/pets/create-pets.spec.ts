@@ -18,7 +18,7 @@ describe("Create Pets e2e", () => {
         name: "Viva",
         email: "viva@gmail.com",
         password: await hash("1234560", 6),
-        whatsapp: 993062435,
+        whatsapp: "993062435",
         rua: "Ali Perto",
         numero: 2545,
         bairro: "União",

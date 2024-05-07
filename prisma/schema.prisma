@@ -44,7 +44,7 @@ model ORG {
   name String
   email String @unique
   password String
-  whatsapp Int
+  whatsapp String
   rua String
   numero Int
   bairro String

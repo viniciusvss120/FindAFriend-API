@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { CreateOrgUseCase } from "./create-org";
 import { InMemoryOrg } from "@/repository/in-memory/in-memory-org";
 import { randomUUID } from "crypto";
+import { hash } from "bcryptjs";
 
 describe("Criar uma ORG", () => {
   let useRepository: InMemoryOrg;
@@ -17,8 +18,8 @@ describe("Criar uma ORG", () => {
       id: randomUUID(),
       name: "Vida",
       email: "vida@gmail.com",
-      password: "123456",
-      whatsapp: 69999999999,
+      password: await hash("123456", 6),
+      whatsapp: "69999999999",
       rua: "Ali Perto",
       numero: 1458,
       bairro: "Jardim Esperança",

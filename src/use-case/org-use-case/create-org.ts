@@ -7,7 +7,7 @@ interface OrgRequest {
   name: string;
   email: string;
   password: string;
-  whatsapp: number;
+  whatsapp: string;
   rua: string;
   numero: number;
   bairro: string;

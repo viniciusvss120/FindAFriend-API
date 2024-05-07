@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { PrismaOrgRepository } from "@/repository/prisma/prisma-org-repository";
 import { makeCreateOrg } from "@/use-case/factory/make-create-org";
-import { hash } from "bcryptjs";
+// import { hash } from "bcryptjs";
 import { randomUUID } from "crypto";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -12,7 +11,7 @@ export async function CreateOrg(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     email: z.string().email(),
     password: z.string(),
-    whatsapp: z.coerce.number(),
+    whatsapp: z.string(),
     rua: z.string(),
     numero: z.coerce.number(),
     bairro: z.string(),
@@ -23,21 +22,13 @@ export async function CreateOrg(request: FastifyRequest, reply: FastifyReply) {
     id,
     name,
     email,
+    password,
     whatsapp,
     rua,
     numero,
     bairro,
     cidade,
   } = dataOrg.parse(request.body);
-
-  // Verificar a existencia da org ****
-  const prismaOrg = new PrismaOrgRepository();
-  const org = await prismaOrg.findByEmail(email);
-
-  if (org) {
-    console.log("Já existe uma ORG com esse email !");
-    throw new Error("Já existe uma ORG com esse email")
-  }
 
   try {
     const pestUseCase = makeCreateOrg();
@@ -46,7 +37,7 @@ export async function CreateOrg(request: FastifyRequest, reply: FastifyReply) {
       id,
       name,
       email,
-      password: await hash("123456", 6),
+      password,
       whatsapp,
       rua,
       numero,
