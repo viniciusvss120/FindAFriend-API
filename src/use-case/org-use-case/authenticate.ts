@@ -25,7 +25,7 @@ export class AuthenticateUseCase {
     const verifyPassword = await compare(password, org.password);
 
     if (!verifyPassword) {
-      throw new Error("Senha incorreta");
+      throw new InvalidCredentialsError();
     }
 
     return { org };

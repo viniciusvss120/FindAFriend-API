@@ -1,5 +1,4 @@
 import { makeAuthenticateOrg } from "@/use-case/factory/make-authenticar-org";
-import { compare } from "bcryptjs";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -14,18 +13,12 @@ export async function Authenticate(
 
   const { email, password } = dataOrg.parse(request.body);
 
-  const orgUseCase = makeAuthenticateOrg();
   try {
+    const orgUseCase = makeAuthenticateOrg();
     const { org } = await orgUseCase.execute({
       email,
       password,
     });
-
-    const verifyPassword = await compare(password, org.password);
-
-    if (!verifyPassword) {
-      throw new Error("Senha errada");
-    }
 
     const token = await reply.jwtSign(
       {},
