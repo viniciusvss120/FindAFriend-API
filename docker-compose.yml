@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  find-a-friands-api-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=desafio3
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=findafriands
