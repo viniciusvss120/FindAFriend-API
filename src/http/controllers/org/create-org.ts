@@ -33,7 +33,7 @@ export async function CreateOrg(request: FastifyRequest, reply: FastifyReply) {
   try {
     const pestUseCase = makeCreateOrg();
 
-    await pestUseCase.execute({
+    const org = await pestUseCase.execute({
       id,
       name,
       email,
@@ -44,9 +44,10 @@ export async function CreateOrg(request: FastifyRequest, reply: FastifyReply) {
       bairro,
       cidade,
     });
+
+    return reply.status(201).send(org);
   } catch (error) {
     return reply.status(409).send({ message: "Deu ruim !" });
   }
 
-  return reply.status(201).send();
 }

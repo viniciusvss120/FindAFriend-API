@@ -4,15 +4,14 @@ import { Pet } from "@prisma/client";
 import { FindPetsError } from "../errors/find-pet";
 
 interface PetsRequest {
-  idade: string | null;
-  nivel_energia: number | null;
-  porte_animal: string | null;
-  nivel_indep: string | null;
+  idade?: string;
+  nivel_energia?: number;
+  porte_animal?: string;
+  nivel_indep?: string;
   cidade: string;
 }
 
 type PetsResponse = Pet[];
-
 export class GetPatsByCaracterUseCase {
   constructor(private petsRepository: PetsRepository) {}
 

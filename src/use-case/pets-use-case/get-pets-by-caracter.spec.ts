@@ -35,10 +35,7 @@ describe("Listar Pets por caracteristicas use case", () => {
     });
 
     const pets = await sut.execute({
-      idade: null,
-      nivel_energia: 3,
-      porte_animal: null,
-      nivel_indep: null,
+      idade: "Filhote",
       cidade: "Jaru",
     });
 

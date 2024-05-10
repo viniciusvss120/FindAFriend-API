@@ -28,8 +28,6 @@ describe("Authenticate e2e", () => {
       email: "viva@gmail.com",
       password: "123456",
     });
-
-    console.log(response.body);
     expect(response.statusCode).toEqual(200);
     expect(response.body).toEqual({
       token: expect.any(String),

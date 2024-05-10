@@ -19,14 +19,15 @@ type Pet = {
 };
 
 type Caracteristica = {
-  idade: string | null;
-  nivel_energia: number | null;
-  porte_animal: string | null;
-  nivel_indep: string | null;
-  [key: string]: string | number | null;
+  idade?: string;
+  nivel_energia?: number;
+  porte_animal?: string;
+  nivel_indep?: string;
+  cidade: string;
+  [key: string]: string | number | undefined;
 };
 type NewObj = {
-  [key: string]: string | number | null;
+  [key: string]: string | number | undefined;
 };
 
 export class InMemoryPets implements PetsRepository {
@@ -51,7 +52,7 @@ export class InMemoryPets implements PetsRepository {
   async findByCaracteristica(data: Caracteristica) {
     const newData: NewObj = {};
     for (const key in data) {
-      if (data[key] !== null) {
+      if (data[key] !== undefined) {
         newData[key] = data[key];
       }
     }

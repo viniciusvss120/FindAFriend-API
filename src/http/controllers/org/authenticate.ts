@@ -12,14 +12,12 @@ export async function Authenticate(
   });
 
   const { email, password } = dataOrg.parse(request.body);
-
   try {
     const orgUseCase = makeAuthenticateOrg();
     const { org } = await orgUseCase.execute({
       email,
       password,
     });
-
     const token = await reply.jwtSign(
       {},
       {
@@ -30,8 +28,8 @@ export async function Authenticate(
     );
     return reply.status(200).send({ token });
   } catch (error) {
-    return reply
-      .status(409)
-      .send({ message: "Deu ruim, algum erro na autenticação !" });
+    return reply.status(409).send({
+      message: "Deu ruim, algum erro na autenticação !",
+    });
   }
 }

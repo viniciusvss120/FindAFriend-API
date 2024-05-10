@@ -19,7 +19,7 @@ describe("List Pets use case", () => {
       nivel_energia: 3,
       porte_animal: "Medio",
       nivel_indep: "Medio",
-      cidadeId: "cidade-1",
+      cidade: "Buritis",
       org_Id: "org-1",
     });
     await useRepository.create({
@@ -29,14 +29,13 @@ describe("List Pets use case", () => {
       nivel_energia: 3,
       porte_animal: "Medio",
       nivel_indep: "Medio",
-      cidadeId: "cidade-1",
+      cidade: "Jaru",
       org_Id: "org-1",
     });
 
     const pets = await sut.execute({
       id: "pet-2",
     });
-    console.log(pets);
     expect(pets).toEqual(
       expect.objectContaining({
         id: "pet-2",

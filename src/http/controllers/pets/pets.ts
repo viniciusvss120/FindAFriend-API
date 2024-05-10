@@ -10,8 +10,8 @@ export async function Pets(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     idade: z.string(),
     nivel_energia: z.coerce.number(),
-    porte_animal: z.enum(["Pequenino", "Médio", "Grande"]).default("Médio"),
-    nivel_indep: z.enum(["Baixo", "Médio", "Alto"]).default("Médio"),
+    porte_animal: z.enum(["Pequenino", "Medio", "Grande"]).default("Medio"),
+    nivel_indep: z.enum(["Baixo", "Medio", "Alto"]).default("Medio"),
     cidade: z.string(),
     org_Id: z.string(),
   });
@@ -30,14 +30,12 @@ export async function Pets(request: FastifyRequest, reply: FastifyReply) {
   // Verificar a existencia da org ****
   const prismaOrg = new PrismaOrgRepository();
   const org = await prismaOrg.findById(org_Id);
-
   if (!org) {
     console.log("Org não encontrada !");
   }
 
   try {
     const pestUseCase = makeCreatePets();
-
     await pestUseCase.execute({
       id,
       name,

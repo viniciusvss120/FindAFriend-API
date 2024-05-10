@@ -1,17 +1,17 @@
 import { prisma } from "@/lib/prisma";
 import { PetsRepository } from "../pets-repository";
-import { Prisma } from "@prisma/client";
+import { Pet, Prisma } from "@prisma/client";
 
 type Caracteristica = {
-  idade: string | null;
-  nivel_energia: number | null;
-  porte_animal: string | null;
-  nivel_indep: string | null;
+  idade?: string;
+  nivel_energia?: number;
+  porte_animal?: string;
+  nivel_indep?: string;
   cidade: string;
-  [key: string]: string | number | null;
+  [key: string]: string | number | undefined;
 };
 type NewObj = {
-  [key: string]: string | number | null;
+  [key: string]: string | number | undefined;
 };
 
 export class PrismaPetsReposytory implements PetsRepository {
@@ -35,14 +35,14 @@ export class PrismaPetsReposytory implements PetsRepository {
     return pets;
   }
 
-  async findByCaracteristica(data: Caracteristica) {
+  async findByCaracteristica(data: Caracteristica): Promise<Pet[]> {
     const newData: NewObj = {};
     for (const key in data) {
-      if (data[key] !== null) {
+      if (data[key] !== undefined) {
         newData[key] = data[key];
       }
     }
-
+    console.log(newData);
     const pets = await prisma.pet.findMany({
       where: newData,
     });
