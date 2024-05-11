@@ -1,5 +1,6 @@
 import { app } from "@/app";
 // import { hash } from "bcryptjs";
+// import { hash } from "bcryptjs";
 import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
@@ -12,7 +13,7 @@ describe("Authenticate e2e", () => {
     await app.close();
   });
 
-  it("deve ser possível se autenticar", async () => {
+  it.only("deve ser possível se autenticar", async () => {
     await request(app.server).post("/org").send({
       name: "Viva",
       email: "viva@gmail.com",

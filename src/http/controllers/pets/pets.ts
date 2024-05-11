@@ -15,7 +15,6 @@ export async function Pets(request: FastifyRequest, reply: FastifyReply) {
     cidade: z.string(),
     org_Id: z.string(),
   });
-
   const {
     id,
     name,

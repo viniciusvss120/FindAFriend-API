@@ -7,8 +7,8 @@ export async function Authenticate(
   reply: FastifyReply,
 ) {
   const dataOrg = z.object({
-    email: z.string(),
-    password: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6),
   });
 
   const { email, password } = dataOrg.parse(request.body);
@@ -18,6 +18,7 @@ export async function Authenticate(
       email,
       password,
     });
+
     const token = await reply.jwtSign(
       {},
       {

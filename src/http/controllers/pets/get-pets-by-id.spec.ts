@@ -41,9 +41,7 @@ describe("Get Pets by caracter e2e", () => {
       },
     });
 
-    console.log(pet.id);
     const response = await request(app.server).get(`/search/${pet.id}`).send();
-    console.log(response.body);
     expect(response.statusCode).toEqual(200);
     expect(response.body).toEqual(
       expect.objectContaining({

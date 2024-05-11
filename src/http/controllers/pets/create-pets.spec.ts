@@ -1,5 +1,6 @@
 import { app } from "@/app";
 import { prisma } from "@/lib/prisma";
+import { createAuthenticate } from "@/use-case/tests/create-authenticate";
 // import { createAuthenticate } from "@/use-case/tests/create-authenticate";
 import { hash } from "bcryptjs";
 import request from "supertest";
@@ -14,7 +15,7 @@ describe("Create Pets e2e", () => {
     await app.close();
   });
   it("deve ser possível criar um pet", async () => {
-    // const token = await createAuthenticate(app);
+    const token = await createAuthenticate(app);
     const org = await prisma.oRG.create({
       data: {
         name: "Viva",
@@ -27,9 +28,10 @@ describe("Create Pets e2e", () => {
         cidade: "Jaru",
       },
     });
+    console.log(token);
     const response = await request(app.server)
       .post("/pets")
-      // .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${token}`)
       .send({
         name: "Jamal",
         idade: "Filhote",
