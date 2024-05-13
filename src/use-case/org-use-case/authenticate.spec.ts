@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryOrg } from "@/repository/in-memory/in-memory-org";
 import { AuthenticateUseCase } from "./authenticate";
 import { randomUUID } from "crypto";
-import { hash } from "bcryptjs";
+// import { hash } from "bcryptjs";
 import { InvalidCredentialsError } from "../errors/authenticar-error";
 
 describe("Criar uma ORG", () => {
@@ -40,7 +40,7 @@ describe("Criar uma ORG", () => {
       id: randomUUID(),
       name: "Vida",
       email: "vida@gmail.com",
-      password: await hash("123456", 6),
+      password: "123456",
       whatsapp: "69999999999",
       rua: "Ali Perto",
       numero: 1458,

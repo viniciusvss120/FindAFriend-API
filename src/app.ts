@@ -1,6 +1,6 @@
 import fastifyJwt from "@fastify/jwt";
 import fastify from "fastify";
-import { env } from "@/env";
+import { env } from "./env";
 import { PetsRoutes } from "./http/controllers/routes";
 import { orgRoutes } from "./http/controllers/org/routes";
 import { ZodError } from "zod";

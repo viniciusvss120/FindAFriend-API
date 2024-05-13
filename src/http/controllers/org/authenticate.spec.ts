@@ -13,7 +13,7 @@ describe("Authenticate e2e", () => {
     await app.close();
   });
 
-  it.only("deve ser possível se autenticar", async () => {
+  it("deve ser possível se autenticar", async () => {
     await request(app.server).post("/org").send({
       name: "Viva",
       email: "viva@gmail.com",
