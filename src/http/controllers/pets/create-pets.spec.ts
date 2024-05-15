@@ -28,7 +28,6 @@ describe("Create Pets e2e", () => {
         cidade: "Jaru",
       },
     });
-    console.log(token);
     const response = await request(app.server)
       .post("/pets")
       .set("Authorization", `Bearer ${token}`)

@@ -6,12 +6,12 @@ interface PetsRequest {
   id: string;
 }
 
-type PetsResponse = Pet[];
+type PetsResponse = Pet;
 
 export class GetPatsByIdUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
-  async execute({ id }: PetsRequest) {
+  async execute({ id }: PetsRequest): Promise<PetsResponse> {
     const pets = await this.petsRepository.findById(id);
 
     if (!pets) {

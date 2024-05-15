@@ -45,7 +45,6 @@ export class CreateOrgUseCase {
       bairro,
       cidade,
     });
-
     return { org };
   }
 }

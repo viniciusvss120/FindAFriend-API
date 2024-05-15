@@ -1,5 +1,6 @@
 import { app } from "@/app";
 import { prisma } from "@/lib/prisma";
+import { createAuthenticate } from "@/use-case/tests/create-authenticate";
 // import { PrismaPetsReposytory } from "@/repository/prisma/prisma-pets-repository";
 import { hash } from "bcryptjs";
 import request from "supertest";
@@ -7,7 +8,7 @@ import { it, describe, afterAll, beforeAll, expect } from "vitest";
 // import { object } from "zod";
 
 // const prismaRepository = new PrismaPetsReposytory()
-describe("Get Pets by caracter e2e", () => {
+describe("Get Pets by id e2e", () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -15,7 +16,8 @@ describe("Get Pets by caracter e2e", () => {
   afterAll(async () => {
     await app.close();
   });
-  it("deve ser possível busca pet pelas caracteristicas", async () => {
+  it("deve ser possível busca pet pelo id", async () => {
+    const token = await createAuthenticate(app);
     const org = await prisma.oRG.create({
       data: {
         name: "Viva",
@@ -41,7 +43,10 @@ describe("Get Pets by caracter e2e", () => {
       },
     });
 
-    const response = await request(app.server).get(`/search/${pet.id}`).send();
+    const response = await request(app.server)
+      .get(`/search/${pet.id}`)
+      .set("Authorization", `Bearer ${token}`)
+      .send();
     expect(response.statusCode).toEqual(200);
     expect(response.body).toEqual(
       expect.objectContaining({

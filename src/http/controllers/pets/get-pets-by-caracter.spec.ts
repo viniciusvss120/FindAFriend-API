@@ -40,8 +40,6 @@ describe("Get Pets by caracter e2e", () => {
         org_Id: org.id,
       },
     });
-
-    console.log(pet);
     // await request(app.server)
     //   .post("/pets")
     //   // .set("Authorization", `Bearer ${token}`)

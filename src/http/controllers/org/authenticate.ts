@@ -27,7 +27,25 @@ export async function Authenticate(
         },
       },
     );
-    return reply.status(200).send({ token });
+
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: org.id,
+          expiresIn: "7d",
+        },
+      },
+    );
+    return reply
+      .setCookie("refresh", refreshToken, {
+        path: "/",
+        secure: true,
+        sameSite: true,
+        httpOnly: true,
+      })
+      .status(200)
+      .send({ token });
   } catch (error) {
     return reply.status(409).send({
       message: "Deu ruim, algum erro na autenticação !",

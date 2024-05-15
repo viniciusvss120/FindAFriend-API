@@ -1,4 +1,4 @@
-import { PrismaOrgRepository } from "@/repository/prisma/prisma-org-repository";
+// import { PrismaOrgRepository } from "@/repository/prisma/prisma-org-repository";
 import { makeCreatePets } from "@/use-case/factory/make-create-pets";
 import { randomUUID } from "crypto";
 import { FastifyReply, FastifyRequest } from "fastify";
@@ -27,11 +27,11 @@ export async function Pets(request: FastifyRequest, reply: FastifyReply) {
   } = dataPets.parse(request.body);
 
   // Verificar a existencia da org ****
-  const prismaOrg = new PrismaOrgRepository();
-  const org = await prismaOrg.findById(org_Id);
-  if (!org) {
-    console.log("Org não encontrada !");
-  }
+  // const prismaOrg = new PrismaOrgRepository();
+  // const org = await prismaOrg.findById(org_Id);
+  // if (!org) {
+  //   console.log("Org não encontrada !");
+  // }
 
   try {
     const pestUseCase = makeCreatePets();
@@ -46,7 +46,7 @@ export async function Pets(request: FastifyRequest, reply: FastifyReply) {
       org_Id,
     });
   } catch (error) {
-    return reply.status(409).send({ message: "Deu ruim !" });
+    return reply.status(409).send({ message: "Falha ao criar um pet !" });
   }
 
   return reply.status(201).send();

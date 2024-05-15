@@ -26,7 +26,5 @@ export async function createAuthenticate(app: FastifyInstance) {
 
   const { token } = authenticate.body;
 
-  return {
-    token,
-  };
+  return token;
 }
